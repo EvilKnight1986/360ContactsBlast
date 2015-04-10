@@ -7,6 +7,7 @@ char g_szSrcFileName[MAX_PATH] = {0} ;
 char g_szDstPath[MAX_PATH]         = {0} ;
 char g_szKeyFileName[MAX_PATH] = {0} ;
 
+/*
 int DecodeDes(char *FileBuf, int nSize, char *pKey)
 {
         FILE *fpDst;
@@ -45,7 +46,7 @@ int DecodeDes(char *FileBuf, int nSize, char *pKey)
         fclose(fpDst);
 }
 
-
+*/
 int ParseArgv(int argc, char ** argv)
 {
         return 0 ;
