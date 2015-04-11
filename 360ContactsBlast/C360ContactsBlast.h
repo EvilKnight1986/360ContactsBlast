@@ -4,6 +4,13 @@
 #include <string>
 using namespace std ;
 
+#ifdef __cplusplus
+extern "C"
+{
+#include "zlib/gzip.h"
+}
+#endif
+
 class C360ContactsBlast
 {
 public:
@@ -24,7 +31,14 @@ private:
         LPVOID m_pSrcBuf;
         // 360 contacts 文件大小
         int m_nSrcFileSize;
-        DES2 myDes;
+        // 用于解压gzip数据的缓冲区大小
+        int m_nGzipBufSize ;
+        // 用于des解压缓存
+        Byte *m_pUndesBuf;
+        // 用于gzip解压缓存
+        Byte *m_pUngzipBuf;
+
+        DES2 m_myDes;
 public:
         // 设置360 contacts数据包的路径
         bool SetSrcFileName(const string & strSrcFileName);
