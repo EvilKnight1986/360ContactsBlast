@@ -16,19 +16,39 @@ int main(int argc, char** argv)
 {
         system("title 360备份联系人数据包爆破") ;
         string str = "D:\\Projects\\test\\passwd.txt" ;
-
-        ParseArgv(argc, argv) ;
+        char szBuffer[260] = {0} ;
 
         C360ContactsBlast ContactsBlast ;
-        ContactsBlast.SetDictionaryPath(str);
 
-        str = "D:\\Projects\\result" ;
-        ContactsBlast.SetDstPath(str) ;
+        // 输入字典路径
+        do 
+        {
+                printf("请输入字典文件路径: ") ;
+                scanf("%s", szBuffer) ;
+                str = szBuffer ;
+        } while (! ContactsBlast.SetDictionaryPath(str));
+        
+        // 设置解密成功文件存储路径
+        // 其实只是存一个成功的密码
+        //do 
+        //{
+        //        printf("请输入解密成功密码存放目录: ") ;
+        //        scanf("%s", szBuffer) ;
+        //        str = szBuffer ;
+        //} while (! ContactsBlast.SetDstPath(str));
 
-        str = "D:\\Projects\\test\\run.txt" ;
-        ContactsBlast.SetSrcFileName(str) ;
+
+        // 设置解密成功文件存储路径
+        // 其实只是存一个成功的密码
+        do 
+        {
+                printf("设置360 contacts数据包文件的路径: ") ;
+                scanf("%s", szBuffer) ;
+                str = szBuffer ;
+        } while (! ContactsBlast.SetSrcFileName(str));
 
         ContactsBlast.Blast() ;
 
+        system("pause") ;
         return 0 ;
 }

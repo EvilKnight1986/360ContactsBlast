@@ -282,6 +282,7 @@ bool C360ContactsBlast::Blast(void)
         int nResult = 0 ;
         string strSuccessPass ;
         DWORD dwNeedBufSize(0) ;
+        int nCount(0) ;
 
         Destroy() ;
 
@@ -330,9 +331,12 @@ bool C360ContactsBlast::Blast(void)
                 // 如果解压成功的话，说明对了，写文件
                 if (-1 != nResult)
                 {
+                        printf("解密成功, Key: %s\r\n", szPass) ;
                         outFile << szPass  << endl;
+                        ++nCount ;
                 }
         }
 
-        return false;
+        nCount != 0? printf("找到 %2d 个有效Key!\n", nCount):puts("没有正确的Key !")
+        return nCount?true:false;
 }

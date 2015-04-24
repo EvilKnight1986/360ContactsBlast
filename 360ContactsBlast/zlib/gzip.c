@@ -45,10 +45,7 @@ int httpgzdecompress(Byte *zdata, uLong nzdata,
 {
 	int err = 0;
 	z_stream d_stream = {0}; /* decompression stream */
-	static char dummy_head[2] = {
-		0x8 + 0x7 * 0x10,
-		(((0x8 + 0x7 * 0x10) * 0x100 + 30) / 31 * 31) & 0xFF,
-	};
+	static char dummy_head[2] = { 0x78,0x9c	};
 	d_stream.zalloc = NULL;
 	d_stream.zfree = NULL;
 	d_stream.opaque = NULL;
