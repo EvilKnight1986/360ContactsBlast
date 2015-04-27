@@ -337,6 +337,6 @@ bool C360ContactsBlast::Blast(void)
                 }
         }
 
-        nCount != 0? printf("找到 %2d 个有效Key!\n", nCount):puts("没有正确的Key !")
+        nCount != 0? printf("找到 %2d 个有效Key!\n", nCount):puts("没有正确的Key !") ;
         return nCount?true:false;
 }
