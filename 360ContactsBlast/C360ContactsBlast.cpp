@@ -327,6 +327,7 @@ bool C360ContactsBlast::Blast(void)
                                         m_pUngzipBuf,
                                         &dwNeedBufSize) ;
 
+
                 m_pUngzipBuf[dwNeedBufSize] = 0 ;
                 // 如果解压成功的话，说明对了，写文件
                 if (-1 != nResult)
@@ -334,9 +335,14 @@ bool C360ContactsBlast::Blast(void)
                         printf("解密成功, Key: %s\r\n", szPass) ;
                         outFile << szPass  << endl;
                         ++nCount ;
+                        printf("\r\n") ;
+                        for (int i(0); i < dwNeedBufSize; ++i)
+                        {
+                                printf("%c", m_pUngzipBuf[i]);
+                        }
                 }
         }
 
-        nCount != 0? printf("找到 %2d 个有效Key!\n", nCount):puts("没有正确的Key !") ;
+        nCount != 0 ? printf("找到 %2d 个有效Key!\n", nCount):puts("没有正确的Key !") ;
         return nCount?true:false;
 }

@@ -82,7 +82,7 @@ bool ParseArgv(int argc, char ** argv)
 int main(int argc, char** argv)
 {
         system("title 360备份联系人数据包爆破") ;
-        string str = "D:\\Projects\\test\\passwd.txt" ;
+        string str = "D:\\test\\passwd.txt" ;
         char szBuffer[260] = {0} ;
 
         if (argc > 1 && 0 != ParseArgv(argc, argv))
@@ -92,13 +92,16 @@ int main(int argc, char** argv)
         }
 
         C360ContactsBlast ContactsBlast ;
+        
+        ContactsBlast.SetDictionaryPath(str);
+
         // 输入字典路径
-        do 
-        {
-                printf("请输入字典文件路径: ") ;
-                scanf_s("%s", szBuffer, MAX_PATH) ;
-                str = szBuffer ;
-        } while (! ContactsBlast.SetDictionaryPath(str));
+        //do 
+        //{
+        //        printf("请输入字典文件路径: ") ;
+        //        scanf_s("%s", szBuffer, MAX_PATH) ;
+        //        str = szBuffer ;
+        //} while (! ContactsBlast.SetDictionaryPath(str));
 
         // 设置解密成功文件存储路径
         // 其实只是存一个成功的密码
