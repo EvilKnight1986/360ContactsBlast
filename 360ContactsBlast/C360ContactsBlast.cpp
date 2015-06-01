@@ -226,7 +226,7 @@ bool C360ContactsBlast::MappingFile(void)
 *  函 数 名 :  Destroy
 *  功能描述 : 释放资源
 *  参数列表 : 无
-*  说    明 :    
+*  说    明 :    把相关的资源给释放了！
 *  返回结果 : 无
 *
 *******************************************************************************/
@@ -265,14 +265,13 @@ void C360ContactsBlast::Destroy(void)
         m_nGzipBufSize = m_nSrcFileSize = 0 ;
 }
 
-// 开始爆破
 /*******************************************************************************
 *
 *  函 数 名 :  Blast
 *  功能描述 : 开始爆破
 *  参数列表 : 无
 *  说    明 :    
-*  返回结果 : 
+*  返回结果 : 成功找到密钥返回true,否则返回false
 *
 *******************************************************************************/
 bool C360ContactsBlast::Blast(void)
@@ -284,6 +283,7 @@ bool C360ContactsBlast::Blast(void)
         DWORD dwNeedBufSize(0) ;
         int nCount(0) ;
 
+        // 这里先释放一下资源
         Destroy() ;
 
         if (! inFile)
@@ -292,13 +292,14 @@ bool C360ContactsBlast::Blast(void)
                 return false ;
         }
 
+        // 将相关的资源映射到内存中去，直接操作内存比操作文件方便
         if(! MappingFile())
         {
                 fprintf(stderr, "MappingFile failed !\r\n") ;
                 return false ;
         }
 
-        // 这里可以断点
+        // 这里可以添加密钥断点的处理，上次破解到哪了
 
         // 这里用来存结果
         strSuccessPass = m_strDstPath ;
@@ -329,6 +330,7 @@ bool C360ContactsBlast::Blast(void)
 
 
                 m_pUngzipBuf[dwNeedBufSize] = 0 ;
+
                 // 如果解压成功的话，说明对了，写文件
                 if (-1 != nResult)
                 {
@@ -336,7 +338,7 @@ bool C360ContactsBlast::Blast(void)
                         outFile << szPass  << endl;
                         ++nCount ;
                         printf("\r\n") ;
-                        for (int i(0); i < dwNeedBufSize; ++i)
+                        for (DWORD i(0); i < dwNeedBufSize; ++i)
                         {
                                 printf("%c", m_pUngzipBuf[i]);
                         }
